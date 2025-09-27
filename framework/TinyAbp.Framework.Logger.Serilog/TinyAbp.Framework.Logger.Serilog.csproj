@@ -1,7 +1,7 @@
-<!-- Framework.Logger.Serilog Serilog日志库项目文件 -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
