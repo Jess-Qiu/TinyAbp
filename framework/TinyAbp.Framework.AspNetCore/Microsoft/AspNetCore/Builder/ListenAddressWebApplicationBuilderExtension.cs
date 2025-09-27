@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
-namespace TinyAbp.Framework.AspNetCore.Microsoft.AspNetCore.Builder;
+namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
 /// 监听地址Web应用程序构建器扩展类
@@ -37,9 +32,14 @@ public static class ListenAddressWebApplicationBuilderExtension
         }
 
         // 如果有监听地址，则应用到WebHost
-        if (listenAddress != null && listenAddress.Any())
+        if (listenAddress?.Any() != true)
+            throw new InvalidOperationException("请配置服务的监听地址");
+
+        builder.WebHost.UseUrls(listenAddress);
+
+        foreach (var uri in listenAddress)
         {
-            builder.WebHost.UseUrls(listenAddress);
+            Log.Warning("服务监听地址: {ListenAddress}", uri);
         }
 
         return builder;

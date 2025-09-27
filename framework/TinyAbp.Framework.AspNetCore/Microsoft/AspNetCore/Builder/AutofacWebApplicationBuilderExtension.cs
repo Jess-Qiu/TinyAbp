@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
-namespace TinyAbp.Framework.AspNetCore.Microsoft.AspNetCore.Builder;
+namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
 /// Autofac Web应用程序构建器扩展类
