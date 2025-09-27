@@ -4,6 +4,10 @@
 
 ## 项目组件
 
-- [ ] Serilog 日志
-- [ ] Autofac 依赖注入
+- [x] Serilog 日志
+- [x] Autofac 依赖注入
 - [ ] Swagger 文档
+- [ ] Cors 策略
+- [ ] Auditing 审计
+- [ ] Exception 异常处理
+- [ ] Json 序列化
