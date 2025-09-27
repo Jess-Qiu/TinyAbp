@@ -1,6 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<!-- Framework.Logger.Serilog Serilog日志库项目文件 -->
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
+  </ItemGroup>
 
 </Project>
