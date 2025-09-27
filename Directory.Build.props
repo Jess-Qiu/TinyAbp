@@ -7,6 +7,5 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AbpVersion>9.3.4</AbpVersion>
-    <RootNamespace />
   </PropertyGroup>
 </Project>
