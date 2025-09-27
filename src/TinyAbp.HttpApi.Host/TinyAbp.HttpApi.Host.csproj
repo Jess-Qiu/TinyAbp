@@ -1,5 +1,4 @@
-<!-- HttpApi.Host主项目文件 -->
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
   </PropertyGroup>
