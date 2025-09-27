@@ -15,6 +15,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyAbp.HttpApi.Host", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyAbp.Framework.Logger.Serilog", "framework\TinyAbp.Framework.Logger.Serilog\TinyAbp.Framework.Logger.Serilog.csproj", "{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{9FA3D6BD-1EC1-3BA5-80CB-CE02773A58D5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,5 +91,8 @@ Global
 		{1348E749-ED3F-46A9-8171-B0942B63E84E} = {9A0CCAB9-4303-13B4-2371-F1B97FF5B728}
 		{0CC1EF48-AC62-4D3E-960B-F27E274F259B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D} = {9A0CCAB9-4303-13B4-2371-F1B97FF5B728}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF766C5D-0B50-452E-B120-729CCDE8DEE8}
 	EndGlobalSection
 EndGlobal

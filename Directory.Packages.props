@@ -1,8 +1,19 @@
 <Project>
+  <!-- 集中式包管理配置 -->
   <PropertyGroup>
-    <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
+    <!-- 启用集中式包管理 - 参见 https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="9.0.9" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <PackageVersion Include="Volo.Abp.AspNetCore" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Autofac" Version="9.3.4" />
+    <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
   </ItemGroup>
 </Project>

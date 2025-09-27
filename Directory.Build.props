@@ -1,5 +1,5 @@
 <Project>
-  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+  <!-- 项目构建设置 - 参见 https://aka.ms/dotnet/msbuild/customize 获取更多构建自定义详情 -->
   <PropertyGroup>
   <TargetFramework>net9.0</TargetFramework>
     <PublishDocumentationFiles>true</PublishDocumentationFiles>

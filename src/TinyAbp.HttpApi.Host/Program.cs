@@ -1,6 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+// 主程序入口点
+using TinyAbp.Framework.AspNetCore.Microsoft.AspNetCore.Builder;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args).RegisterAutofacContainer().RegisterListenAddress();
+
+var app = builder.Build();
 
 app.Run();
