@@ -1,7 +1,7 @@
-<!-- Framework.AspNetCore ASP.NET Core集成库项目文件 -->
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <RootNamespace />
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TinyAbp.HttpApi.Host\TinyAbp.HttpApi.Host.csproj" />
     <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
   </ItemGroup>
 
