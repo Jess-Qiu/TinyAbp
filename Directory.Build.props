@@ -1,0 +1,12 @@
+<Project>
+  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+  <PropertyGroup>
+  <TargetFramework>net9.0</TargetFramework>
+    <PublishDocumentationFiles>true</PublishDocumentationFiles>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AbpVersion>9.3.4</AbpVersion>
+    <RootNamespace />
+  </PropertyGroup>
+</Project>
