@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scalar.AspNetCore" />
+    <PackageReference Include="Scalar.AspNetCore.Swashbuckle" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
+  </ItemGroup>
+
+</Project>
