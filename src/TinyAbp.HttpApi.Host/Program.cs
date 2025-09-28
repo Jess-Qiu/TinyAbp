@@ -1,5 +1,6 @@
 using Serilog;
 using TinyAbp.HttpApi.Host;
+using Volo.Abp;
 
 Console.WriteLine(
     """
@@ -30,8 +31,6 @@ try
 
     // 初始化应用程序
     await app.InitializeApplicationAsync();
-
-    app.MapGet("/", () => "HelloWorld");
 
     // 运行应用程序
     await app.RunAsync();
