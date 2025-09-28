@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyAbp.Framework.ApiDoc", "framework\TinyAbp.Framework.ApiDoc\TinyAbp.Framework.ApiDoc.csproj", "{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,18 @@ Global
 		{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D}.Release|x64.Build.0 = Release|Any CPU
 		{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D}.Release|x86.Build.0 = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|x64.Build.0 = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +105,7 @@ Global
 		{1348E749-ED3F-46A9-8171-B0942B63E84E} = {9A0CCAB9-4303-13B4-2371-F1B97FF5B728}
 		{0CC1EF48-AC62-4D3E-960B-F27E274F259B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{4A8A781F-88C7-40DD-B0C4-77C113CA4F1D} = {9A0CCAB9-4303-13B4-2371-F1B97FF5B728}
+		{3554B686-B64B-45B2-B2AA-6FFE2D7E78F3} = {9A0CCAB9-4303-13B4-2371-F1B97FF5B728}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EF766C5D-0B50-452E-B120-729CCDE8DEE8}
