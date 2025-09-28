@@ -1,9 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
+using Volo.Abp.AspNetCore.Mvc.Json;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
@@ -16,11 +19,8 @@ namespace TinyAbp.HttpApi.Host;
 /// Tiny Abp HttpApi Host Module - 主应用程序模块配置
 /// </summary>
 [DependsOn(
-    // 依赖Autofac依赖注入容器模块
     typeof(AbpAutofacModule),
-    // 依赖ASP.NET Core MVC模块
     typeof(AbpAspNetCoreMvcModule),
-    // 依赖ASP.NET Core Serilog日志模块
     typeof(AbpAspNetCoreSerilogModule)
 )]
 public class TinyAbpHttpApiHostModule : AbpModule
@@ -58,6 +58,9 @@ public class TinyAbpHttpApiHostModule : AbpModule
 
         // 配置审计日志功能
         ConfigureAuditing(context);
+
+        // 配置 Mvc 过滤器
+        ConfigureMvcFilter(context);
 
         await base.ConfigureServicesAsync(context);
     }
@@ -102,16 +105,12 @@ public class TinyAbpHttpApiHostModule : AbpModule
     /// <param name="context">服务配置上下文</param>
     private void ConfigureJsonOptions(ServiceConfigurationContext context)
     {
-        Configure<JsonOptions>(options =>
-        {
-            options.JsonSerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        });
-
         Configure<AbpJsonOptions>(options =>
         {
             options.OutputDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
         });
+
+        context.Services.AddMvcCore().AddAbpJson();
     }
 
     /// <summary>
@@ -122,7 +121,7 @@ public class TinyAbpHttpApiHostModule : AbpModule
     {
         Configure<AbpExceptionHandlingOptions>(options =>
         {
-            options.SendExceptionsDetailsToClients = true;
+            options.SendExceptionsDetailsToClients = false;
             options.SendStackTraceToClients = false;
         });
     }
@@ -140,6 +139,17 @@ public class TinyAbpHttpApiHostModule : AbpModule
         });
     }
 
+    private void ConfigureMvcFilter(ServiceConfigurationContext context)
+    {
+        context.Services.AddMvc(options =>
+        {
+            options.Filters.RemoveAll(x =>
+                (x as ServiceFilterAttribute)?.ServiceType == typeof(AbpExceptionFilter)
+            );
+            options.Filters.AddService<TinyAbpExceptionFilter>();
+        });
+    }
+
     /// <summary>
     /// 应用程序初始化 - 配置中间件管道
     /// </summary>
@@ -152,16 +162,9 @@ public class TinyAbpHttpApiHostModule : AbpModule
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
-        if (env.IsDevelopment())
-        {
-            app.UseApiDocument();
-        }
-        else
-        {
-            app.UseCors();
-        }
-
+        app.UseCors();
         app.UseRouting();
+        app.UseApiDocument();
         app.UseAuditing();
         app.UseConfiguredEndpoints();
 
