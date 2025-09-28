@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <RootNamespace />
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" />
     <PackageReference Include="Volo.Abp.AspNetCore" />
@@ -11,9 +9,7 @@
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
     <PackageReference Include="Volo.Abp.Autofac" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
   </ItemGroup>
-
 </Project>

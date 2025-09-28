@@ -1,4 +1,5 @@
-﻿using TinyAbp.Framework.ApiDoc;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
@@ -16,8 +17,7 @@ namespace TinyAbp.HttpApi.Host;
     // 依赖ASP.NET Core MVC模块
     typeof(AbpAspNetCoreMvcModule),
     // 依赖ASP.NET Core Serilog日志模块
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(TinyAbpFrameworkApiDocModule)
+    typeof(AbpAspNetCoreSerilogModule)
 )]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
@@ -62,7 +62,10 @@ public class TinyAbpHttpApiHostModule : AbpModule
     /// 配置Swagger文档生成
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    private void ConfigureSwagger(ServiceConfigurationContext context) { }
+    private void ConfigureSwagger(ServiceConfigurationContext context)
+    {
+        context.Services.AddApiDocument();
+    }
 
     /// <summary>
     /// 配置跨域资源共享(CORS)
@@ -97,8 +100,10 @@ public class TinyAbpHttpApiHostModule : AbpModule
         ApplicationInitializationContext context
     )
     {
-        // 应用程序初始化阶段：配置中间件管道
-        // todo 2: 配置中间件管道
+        var app = context.GetApplicationBuilder();
+        app.UseRouting();
+        app.UseApiDocument();
+
         await base.OnApplicationInitializationAsync(context);
     }
 }
