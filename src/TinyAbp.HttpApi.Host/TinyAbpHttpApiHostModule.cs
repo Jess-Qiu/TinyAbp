@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.OpenApi.Models;
+﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
+using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
 namespace TinyAbp.HttpApi.Host;
@@ -71,25 +75,70 @@ public class TinyAbpHttpApiHostModule : AbpModule
     /// 配置跨域资源共享(CORS)
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    private void ConfigureCors(ServiceConfigurationContext context) { }
+    private void ConfigureCors(ServiceConfigurationContext context)
+    {
+        context.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                var origins =
+                    context
+                        .Services.GetConfiguration()
+                        .GetSection("App:CorsOrigins")
+                        .Get<string[]>()
+                    ?? Array.Empty<string>();
+
+                builder.WithOrigins(origins);
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowCredentials();
+            });
+        });
+    }
 
     /// <summary>
     /// 配置JSON序列化选项
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    private void ConfigureJsonOptions(ServiceConfigurationContext context) { }
+    private void ConfigureJsonOptions(ServiceConfigurationContext context)
+    {
+        Configure<JsonOptions>(options =>
+        {
+            options.JsonSerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+
+        Configure<AbpJsonOptions>(options =>
+        {
+            options.OutputDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        });
+    }
 
     /// <summary>
     /// 配置异常处理
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    private void ConfigureException(ServiceConfigurationContext context) { }
+    private void ConfigureException(ServiceConfigurationContext context)
+    {
+        Configure<AbpExceptionHandlingOptions>(options =>
+        {
+            options.SendExceptionsDetailsToClients = true;
+            options.SendStackTraceToClients = false;
+        });
+    }
 
     /// <summary>
     /// 配置审计日志
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    private void ConfigureAuditing(ServiceConfigurationContext context) { }
+    private void ConfigureAuditing(ServiceConfigurationContext context)
+    {
+        Configure<AbpAuditingOptions>(options =>
+        {
+            options.IsEnabled = true;
+            options.ApplicationName = "TinyAbp";
+        });
+    }
 
     /// <summary>
     /// 应用程序初始化 - 配置中间件管道
@@ -101,8 +150,20 @@ public class TinyAbpHttpApiHostModule : AbpModule
     )
     {
         var app = context.GetApplicationBuilder();
+        var env = context.GetEnvironment();
+
+        if (env.IsDevelopment())
+        {
+            app.UseApiDocument();
+        }
+        else
+        {
+            app.UseCors();
+        }
+
         app.UseRouting();
-        app.UseApiDocument();
+        app.UseAuditing();
+        app.UseConfiguredEndpoints();
 
         await base.OnApplicationInitializationAsync(context);
     }
