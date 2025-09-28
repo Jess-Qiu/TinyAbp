@@ -1,4 +1,5 @@
-﻿using Volo.Abp;
+﻿using TinyAbp.Framework.ApiDoc;
+using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
@@ -14,10 +15,9 @@ namespace TinyAbp.HttpApi.Host;
     typeof(AbpAutofacModule),
     // 依赖ASP.NET Core MVC模块
     typeof(AbpAspNetCoreMvcModule),
-    // 依赖Swagger文档生成模块（已注释）
-    //typeof(AbpSwashbuckleModule),
     // 依赖ASP.NET Core Serilog日志模块
-    typeof(AbpAspNetCoreSerilogModule)
+    typeof(AbpAspNetCoreSerilogModule),
+    typeof(TinyAbpFrameworkApiDocModule)
 )]
 public class TinyAbpHttpApiHostModule : AbpModule
 {

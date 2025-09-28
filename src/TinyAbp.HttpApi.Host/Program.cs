@@ -11,14 +11,14 @@ Console.WriteLine(
     """
 );
 
-var builder = WebApplication.CreateBuilder(args)
+var builder = WebApplication
+    .CreateBuilder(args)
     .RegisterSerilogLogger()
     .RegisterAutofacContainer()
     .RegisterListenAddress();
 
 // 记录当前主机启动环境
 Log.Information($"当前主机启动环境 - {builder.Environment.EnvironmentName}");
-
 
 try
 {
@@ -30,6 +30,8 @@ try
 
     // 初始化应用程序
     await app.InitializeApplicationAsync();
+
+    app.MapGet("/", () => "HelloWorld");
 
     // 运行应用程序
     await app.RunAsync();
