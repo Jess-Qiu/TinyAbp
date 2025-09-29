@@ -18,6 +18,8 @@
     <PackageVersion Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application" Version="9.3.4" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.Swashbuckle" Version="9.3.4" />
   </ItemGroup>
 </Project>
