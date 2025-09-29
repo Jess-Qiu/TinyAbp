@@ -1,11 +1,14 @@
 <Project>
   <!-- 项目构建设置 - 参见 https://aka.ms/dotnet/msbuild/customize 获取更多构建自定义详情 -->
   <PropertyGroup>
-  <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <PublishDocumentationFiles>true</PublishDocumentationFiles>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AbpVersion>9.3.4</AbpVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 </Project>
