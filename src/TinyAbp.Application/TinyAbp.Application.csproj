@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\TinyAbp.Framework.Ddd.Application\TinyAbp.Framework.Ddd.Application.csproj" />
+    <ProjectReference Include="..\TinyAbp.Application.Contracts\TinyAbp.Application.Contracts.csproj" />
+  </ItemGroup>
+</Project>
