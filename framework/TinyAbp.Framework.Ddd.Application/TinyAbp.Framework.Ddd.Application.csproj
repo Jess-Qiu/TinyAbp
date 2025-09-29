@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
+    <ProjectReference Include="..\TinyAbp.Framework.Ddd.Application.Contracts\TinyAbp.Framework.Ddd.Application.Contracts.csproj" />
+  </ItemGroup>
+</Project>
