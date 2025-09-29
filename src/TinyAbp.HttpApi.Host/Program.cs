@@ -1,6 +1,5 @@
 using Serilog;
 using TinyAbp.HttpApi.Host;
-using Volo.Abp;
 
 Console.WriteLine(
     """

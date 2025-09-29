@@ -1,16 +1,13 @@
-﻿using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ExceptionHandling;
 using TinyAbp.Application;
+using TinyAbp.Framework.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc.Json;
-using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Auditing;
-using Volo.Abp.Autofac;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
@@ -19,13 +16,7 @@ namespace TinyAbp.HttpApi.Host;
 /// <summary>
 /// Tiny Abp HttpApi Host Module - 主应用程序模块配置
 /// </summary>
-[DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(AbpAspNetCoreMvcModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    // 加载应用层模块
-    typeof(TinyAbpApplicationModule)
-)]
+[DependsOn(typeof(TinyAbpFrameworkAspNetCoreModule), typeof(TinyAbpApplicationModule))]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
     /// <summary>

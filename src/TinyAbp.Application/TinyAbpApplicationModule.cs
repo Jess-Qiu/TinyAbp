@@ -1,5 +1,4 @@
-﻿using TinyAbp.Application.Contracts;
-using TinyAbp.Framework.Ddd.Application;
+﻿using TinyAbp.Framework.Ddd.Application;
 using Volo.Abp.Modularity;
 
 namespace TinyAbp.Application;
