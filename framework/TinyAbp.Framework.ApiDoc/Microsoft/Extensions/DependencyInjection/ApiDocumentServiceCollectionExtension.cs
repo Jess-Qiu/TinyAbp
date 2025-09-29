@@ -36,6 +36,7 @@ public static class ApiDocumentServiceCollectionExtension
 
             ConfigurateApiDocGroups(options, remoteServiceSettings);
             ConfigurateApiDocFilter(options, remoteServiceSettings);
+            ConfigurateLoadAssemblyXml(options);
         });
 
         return services;
@@ -50,10 +51,17 @@ public static class ApiDocumentServiceCollectionExtension
         {
             foreach (var setting in remoteServiceSettings)
             {
-                options.SwaggerDoc(
-                    setting.RemoteServiceName,
-                    new() { Title = setting.RemoteServiceName, Version = "v1" }
-                );
+                if (
+                    !options.SwaggerGeneratorOptions.SwaggerDocs.ContainsKey(
+                        setting.RemoteServiceName
+                    )
+                )
+                {
+                    options.SwaggerDoc(
+                        setting.RemoteServiceName,
+                        new() { Title = setting.RemoteServiceName, Version = "v1" }
+                    );
+                }
             }
         }
     }
@@ -84,6 +92,17 @@ public static class ApiDocumentServiceCollectionExtension
                     return false;
                 }
             );
+        }
+    }
+
+    private static void ConfigurateLoadAssemblyXml(SwaggerGenOptions options)
+    {
+        var basePath = AppContext.BaseDirectory;
+        var xmlFiles = Directory.GetFiles(basePath, "*.xml");
+
+        foreach (var xmlFile in xmlFiles)
+        {
+            options.IncludeXmlComments(xmlFile, true);
         }
     }
 }
