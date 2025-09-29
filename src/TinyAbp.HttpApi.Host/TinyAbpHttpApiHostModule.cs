@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ExceptionHandling;
+using TinyAbp.Application;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
@@ -21,7 +22,9 @@ namespace TinyAbp.HttpApi.Host;
 [DependsOn(
     typeof(AbpAutofacModule),
     typeof(AbpAspNetCoreMvcModule),
-    typeof(AbpAspNetCoreSerilogModule)
+    typeof(AbpAspNetCoreSerilogModule),
+    // 加载应用层模块
+    typeof(TinyAbpApplicationModule)
 )]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
@@ -33,7 +36,19 @@ public class TinyAbpHttpApiHostModule : AbpModule
     public override async Task PreConfigureServicesAsync(ServiceConfigurationContext context)
     {
         // 预配置阶段：在主要服务配置之前执行
-        // todo 1: 配置模块
+        PreConfigure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(
+                typeof(TinyAbpApplicationModule).Assembly,
+                opt => opt.RemoteServiceName = "default"
+            );
+
+            foreach (var setting in options.ConventionalControllers.ConventionalControllerSettings)
+            {
+                setting.RootPath = "api";
+            }
+        });
+
         await base.PreConfigureServicesAsync(context);
     }
 
@@ -121,8 +136,7 @@ public class TinyAbpHttpApiHostModule : AbpModule
     {
         Configure<AbpExceptionHandlingOptions>(options =>
         {
-            options.SendExceptionsDetailsToClients = false;
-            options.SendStackTraceToClients = false;
+            options.SendExceptionsDetailsToClients = true;
         });
     }
 
@@ -141,6 +155,8 @@ public class TinyAbpHttpApiHostModule : AbpModule
 
     private void ConfigureMvcFilter(ServiceConfigurationContext context)
     {
+        context.Services.AddTransient<TinyAbpExceptionFilter>();
+
         context.Services.AddMvc(options =>
         {
             options.Filters.RemoveAll(x =>
@@ -166,6 +182,7 @@ public class TinyAbpHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseApiDocument();
         app.UseAuditing();
+        app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
 
         await base.OnApplicationInitializationAsync(context);
