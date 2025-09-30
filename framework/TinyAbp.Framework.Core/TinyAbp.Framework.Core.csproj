@@ -3,6 +3,8 @@
 
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp 框架核心库，提供基础的核心功能和服务</Description>
+    <PackageTags>tinyabp;core;framework</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

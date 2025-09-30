@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp 框架DDD应用程序模块，实现应用层的业务逻辑和服务</Description>
+    <PackageTags>tinyabp;ddd;application</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application" />

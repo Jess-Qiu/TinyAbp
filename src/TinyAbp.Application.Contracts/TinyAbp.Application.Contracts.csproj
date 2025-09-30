@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp 应用程序契约模块，定义应用层的接口和DTO</Description>
+    <PackageTags>tinyabp;application;contracts</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Ddd.Application.Contracts\TinyAbp.Framework.Ddd.Application.Contracts.csproj" />
