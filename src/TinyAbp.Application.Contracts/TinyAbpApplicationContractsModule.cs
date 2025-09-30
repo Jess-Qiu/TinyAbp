@@ -1,4 +1,3 @@
-using TinyAbp.Framework.Ddd.Application.Contracts;
 using Volo.Abp.Modularity;
 
 namespace TinyAbp.Application.Contracts;
