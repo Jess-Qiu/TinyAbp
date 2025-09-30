@@ -22,6 +22,7 @@
     <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.FluentValidation" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.ObjectMapping" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
   </ItemGroup>
