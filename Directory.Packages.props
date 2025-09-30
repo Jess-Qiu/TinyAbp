@@ -7,6 +7,8 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <PackageVersion Include="FreeRedis" Version="1.5.0" />
+    <PackageVersion Include="FreeRedis.DistributedCache" Version="1.5.0" />
     <PackageVersion Include="Mapster" Version="7.4.0" />
     <PackageVersion Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="9.0.9" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.8.7" />
@@ -19,9 +21,11 @@
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Caching" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.DistributedLocking.Abstractions" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.FluentValidation" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.ObjectMapping" Version="9.3.4" />
     <PackageVersion Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />

@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp API文档模块，提供Swagger和Scalar API文档生成</Description>
+    <PackageTags>tinyabp;api;documentation;swagger;scalar</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Scalar.AspNetCore" />

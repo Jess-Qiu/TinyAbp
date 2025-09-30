@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp ASP.NET Core 框架模块，提供Web应用的核心服务和中间件配置</Description>
+    <PackageTags>tinyabp;aspnetcore;framework</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" />

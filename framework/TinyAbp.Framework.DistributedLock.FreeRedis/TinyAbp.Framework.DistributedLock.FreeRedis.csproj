@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+    <Description>TinyAbp FreeRedis 分布式锁模块，提供基于 FreeRedis 的分布式锁服务</Description>
+    <PackageTags>tinyabp;redis;distributed;lock;freeredis</PackageTags>
+  </PropertyGroup>
+</Project>
