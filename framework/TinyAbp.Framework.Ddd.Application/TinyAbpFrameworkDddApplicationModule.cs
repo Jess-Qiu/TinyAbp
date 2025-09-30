@@ -1,8 +1,5 @@
-using TinyAbp.Framework.Ddd.Application.Contracts;
 using Volo.Abp.Application;
 using Volo.Abp.Modularity;
-
-namespace TinyAbp.Framework.Ddd.Application;
 
 /// <summary>
 /// TinyAbp框架DDD应用程序模块

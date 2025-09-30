@@ -7,8 +7,6 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
-namespace TinyAbp.Framework.AspNetCore;
-
 /// <summary>
 /// Tiny Abp Framework AspNetCore Module - 集成ASP.NET Core相关功能
 /// </summary>
