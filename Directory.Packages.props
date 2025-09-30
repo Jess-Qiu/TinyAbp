@@ -7,19 +7,22 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <PackageVersion Include="Mapster" Version="7.4.0" />
     <PackageVersion Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="9.0.9" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.8.7" />
     <PackageVersion Include="Scalar.AspNetCore.Swashbuckle" Version="2.8.7" />
     <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageVersion Include="Serilog.Formatting.Compact" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <!-- Volo Abp Packages -->
     <PackageVersion Include="Volo.Abp.AspNetCore" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
-    <PackageVersion Include="Volo.Abp.Ddd.Application" Version="9.3.4" />
-    <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="9.3.4" />
-    <PackageVersion Include="Volo.Abp.Swashbuckle" Version="9.3.4" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.ObjectMapping" Version="9.3.4" />
+    <PackageVersion Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
   </ItemGroup>
 </Project>

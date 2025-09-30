@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace Services;
+namespace Services.Test;
 
 /// <summary>
 /// 测试服务
@@ -44,4 +47,18 @@ public class TestService : ApplicationService, ITestService
     /// <returns></returns>
     [HttpGet("hello-world")]
     public string HelloWorld() => "Hello TinyAbp";
+
+    /// <summary>
+    /// 测试对象映射
+    /// </summary>
+    /// <returns></returns>
+    public IActionResult GetObjectMapping()
+    {
+        var output = ObjectMapper.Map(
+            new TestInput { Name = "TinyAbp", Name1 = "Hello" },
+            new TestOutput()
+        );
+
+        return new ObjectResult(output);
+    }
 }
