@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp Mapster 对象映射模块，提供高性能的对象转换服务</Description>
+    <PackageTags>tinyabp;mapster;objectmapping</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Mapster" />
