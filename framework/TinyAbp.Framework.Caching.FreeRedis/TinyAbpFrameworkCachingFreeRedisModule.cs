@@ -6,12 +6,14 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Volo.Abp.Caching;
 using Volo.Abp.Modularity;
 
+namespace TinyAbp.Framework.Caching.FreeRedis;
+
 /// <summary>
-/// TinyAbp FreeRedis 分布式缓存模块
-/// 提供基于 FreeRedis 的分布式缓存服务配置
+/// FreeRedis缓存模块
+/// 提供基于FreeRedis的分布式缓存实现
 /// </summary>
 [DependsOn(typeof(AbpCachingModule))]
-public class TinyAbpFrameworkDistributedCacheFreeRedisModule : AbpModule
+public class TinyAbpFrameworkCachingFreeRedisModule : AbpModule
 {
     private const string RedisEnabledKey = "Redis:IsEnabled";
     private const string RedisConfigurationKey = "Redis:Configuration";
