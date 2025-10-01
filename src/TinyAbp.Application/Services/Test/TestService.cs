@@ -1,8 +1,8 @@
-﻿using Mapster;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Caching;
 
 namespace Services.Test;
 
@@ -11,6 +11,13 @@ namespace Services.Test;
 /// </summary>
 public class TestService : ApplicationService, ITestService
 {
+    private readonly IDistributedCache<string> _cache;
+
+    public TestService(IDistributedCache<string> cache)
+    {
+        _cache = cache;
+    }
+
     /// <summary>
     /// 获取应用程序名称
     /// </summary>
@@ -60,5 +67,12 @@ public class TestService : ApplicationService, ITestService
         );
 
         return new ObjectResult(output);
+    }
+
+    public async Task<string> PostCacheItemAsync(string key, string value)
+    {
+        await _cache.SetAsync(key, value);
+
+        return $"已设置 {key} 缓存: {await _cache.GetAsync(key)}";
     }
 }

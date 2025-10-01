@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ExceptionHandling;
 using TinyAbp.Application;
+using TinyAbp.Framework.Caching.FreeRedis;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc.Json;
 using Volo.Abp.Auditing;
+using Volo.Abp.Caching;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
@@ -15,7 +17,11 @@ namespace TinyAbp.HttpApi.Host;
 /// <summary>
 /// Tiny Abp HttpApi Host Module - 主应用程序模块配置
 /// </summary>
-[DependsOn(typeof(TinyAbpFrameworkAspNetCoreModule), typeof(TinyAbpApplicationModule))]
+[DependsOn(
+    typeof(TinyAbpFrameworkAspNetCoreModule),
+    typeof(TinyAbpApplicationModule),
+    typeof(TinyAbpFrameworkCachingFreeRedisModule)
+)]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
     /// <summary>
@@ -66,6 +72,9 @@ public class TinyAbpHttpApiHostModule : AbpModule
 
         // 配置 Mvc 过滤器
         ConfigureMvcFilter(context);
+
+        // 配置 Cache
+        ConfigureCache(context);
 
         await base.ConfigureServicesAsync(context);
     }
@@ -153,6 +162,14 @@ public class TinyAbpHttpApiHostModule : AbpModule
                 (x as ServiceFilterAttribute)?.ServiceType == typeof(AbpExceptionFilter)
             );
             options.Filters.AddService<TinyAbpExceptionFilter>();
+        });
+    }
+
+    private void ConfigureCache(ServiceConfigurationContext context)
+    {
+        Configure<AbpDistributedCacheOptions>(options =>
+        {
+            options.KeyPrefix = "TinyAbp_";
         });
     }
 

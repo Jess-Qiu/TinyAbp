@@ -1,16 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <Description>TinyAbp HTTP API 主机项目，提供Web API服务和宿主环境</Description>
     <PackageTags>tinyabp;httpapi;host;web</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.ApiDoc\TinyAbp.Framework.ApiDoc.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.AspNetCore\TinyAbp.Framework.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\framework\TinyAbp.Framework.Caching.FreeRedis\TinyAbp.Framework.Caching.FreeRedis.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Logger.Serilog\TinyAbp.Framework.Logger.Serilog.csproj" />
     <ProjectReference Include="..\TinyAbp.Application\TinyAbp.Application.csproj" />
   </ItemGroup>
-
 </Project>
