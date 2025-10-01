@@ -1,6 +1,7 @@
 using Serilog;
 using TinyAbp.HttpApi.Host;
 
+// 显示应用程序启动横幅
 Console.WriteLine(
     """
      _____ ___ _  ___   __    _   ___ ___   ___                                  _   
@@ -11,6 +12,7 @@ Console.WriteLine(
     """
 );
 
+// 创建Web应用程序构建器并注册日志、依赖注入容器和监听地址
 var builder = WebApplication
     .CreateBuilder(args)
     .RegisterSerilogLogger()

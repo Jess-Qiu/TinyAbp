@@ -1,8 +1,12 @@
-﻿using Volo.Abp.Application.Services;
+using Volo.Abp.Application.Services;
 using Volo.Abp.DependencyInjection;
 
 namespace Services;
 
+/// <summary>
+/// 测试服务接口
+/// 定义测试相关的业务操作
+/// </summary>
 public interface ITestService : IApplicationService, ITransientDependency
 {
     /// <summary>

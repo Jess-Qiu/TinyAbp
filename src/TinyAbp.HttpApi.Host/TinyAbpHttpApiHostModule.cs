@@ -152,6 +152,10 @@ public class TinyAbpHttpApiHostModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// 配置Mvc过滤器
+    /// </summary>
+    /// <param name="context">服务配置上下文</param>
     private void ConfigureMvcFilter(ServiceConfigurationContext context)
     {
         context.Services.AddTransient<TinyAbpExceptionFilter>();
@@ -165,6 +169,10 @@ public class TinyAbpHttpApiHostModule : AbpModule
         });
     }
 
+    /// <summary>
+    /// 配置缓存
+    /// </summary>
+    /// <param name="context">服务配置上下文</param>
     private void ConfigureCache(ServiceConfigurationContext context)
     {
         Configure<AbpDistributedCacheOptions>(options =>

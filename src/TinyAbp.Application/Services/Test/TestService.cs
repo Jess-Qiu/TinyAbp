@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
@@ -8,11 +8,16 @@ namespace Services.Test;
 
 /// <summary>
 /// 测试服务
+/// 实现测试相关的业务逻辑
 /// </summary>
 public class TestService : ApplicationService, ITestService
 {
     private readonly IDistributedCache<string> _cache;
 
+    /// <summary>
+    /// 构造函数
+    /// </summary>
+    /// <param name="cache">分布式缓存</param>
     public TestService(IDistributedCache<string> cache)
     {
         _cache = cache;
@@ -69,6 +74,12 @@ public class TestService : ApplicationService, ITestService
         return new ObjectResult(output);
     }
 
+    /// <summary>
+    /// 设置缓存项
+    /// </summary>
+    /// <param name="key">缓存键</param>
+    /// <param name="value">缓存值</param>
+    /// <returns>设置结果</returns>
     public async Task<string> PostCacheItemAsync(string key, string value)
     {
         await _cache.SetAsync(key, value);
