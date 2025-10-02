@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FreeRedis" />
+    <PackageReference Include="FreeRedis.DistributedCache" />
+    <PackageReference Include="Volo.Abp.Caching" />
+  </ItemGroup>
+</Project>
