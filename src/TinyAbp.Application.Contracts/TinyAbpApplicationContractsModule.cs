@@ -7,8 +7,8 @@ namespace TinyAbp.Application.Contracts;
 /// 定义应用程序层的契约接口
 /// </summary>
 [DependsOn(typeof(TinyAbpFrameworkDddApplicationContractsModule))]
-public class TinyAbpApplicationContractsModule : AbpModule 
-{ 
+public class TinyAbpApplicationContractsModule : AbpModule
+{
     /// <summary>
     /// 配置服务 - 注册应用程序契约服务
     /// </summary>

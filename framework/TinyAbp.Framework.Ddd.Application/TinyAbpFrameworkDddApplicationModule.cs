@@ -11,8 +11,8 @@ using Volo.Abp.Modularity;
     typeof(AbpDddApplicationModule),
     typeof(AbpFluentValidationModule)
 )]
-public class TinyAbpFrameworkDddApplicationModule : AbpModule 
-{ 
+public class TinyAbpFrameworkDddApplicationModule : AbpModule
+{
     /// <summary>
     /// 配置服务 - 注册DDD应用程序层服务
     /// </summary>

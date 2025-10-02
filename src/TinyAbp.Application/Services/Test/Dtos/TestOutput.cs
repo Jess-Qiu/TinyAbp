@@ -15,7 +15,7 @@ public class TestOutput
     /// 名称
     /// </summary>
     public string Name { get; set; }
-    
+
     /// <summary>
     /// 名称2
     /// </summary>

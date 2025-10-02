@@ -4,8 +4,7 @@
     <!-- 启用集中式包管理 - 参见 https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <ItemGroup>
     <PackageVersion Include="FreeRedis" Version="1.5.0" />
     <PackageVersion Include="FreeRedis.DistributedCache" Version="1.5.0" />

@@ -1,14 +1,11 @@
 <!-- Framework.Core核心库项目文件 -->
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <RootNamespace />
     <Description>TinyAbp 框架核心库，提供基础的核心功能和服务</Description>
     <PackageTags>tinyabp;core;framework</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Core" />
   </ItemGroup>
-
 </Project>

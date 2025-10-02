@@ -6,8 +6,8 @@ using Volo.Abp.Modularity;
 /// 定义应用程序层的契约接口和服务
 /// </summary>
 [DependsOn(typeof(AbpDddApplicationContractsModule))]
-public class TinyAbpFrameworkDddApplicationContractsModule : AbpModule 
-{ 
+public class TinyAbpFrameworkDddApplicationContractsModule : AbpModule
+{
     /// <summary>
     /// 配置服务 - 注册DDD应用程序契约服务
     /// </summary>

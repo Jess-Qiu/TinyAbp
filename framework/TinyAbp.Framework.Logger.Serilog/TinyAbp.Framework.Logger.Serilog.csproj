@@ -1,19 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <RootNamespace />
     <Description>TinyAbp Serilog 日志模块，提供结构化的日志记录服务</Description>
     <PackageTags>tinyabp;logging;serilog</PackageTags>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Serilog.Formatting.Compact" />
     <PackageReference Include="Serilog.Sinks.Async" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
   </ItemGroup>
-
 </Project>
