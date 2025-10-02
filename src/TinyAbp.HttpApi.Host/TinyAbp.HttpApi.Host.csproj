@@ -6,7 +6,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.ApiDoc\TinyAbp.Framework.ApiDoc.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.AspNetCore\TinyAbp.Framework.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\framework\TinyAbp.Framework.Caching.FreeRedis\TinyAbp.Framework.Caching.FreeRedis.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Logger.Serilog\TinyAbp.Framework.Logger.Serilog.csproj" />
     <ProjectReference Include="..\TinyAbp.Application\TinyAbp.Application.csproj" />
