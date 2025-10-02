@@ -1,6 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <RootNamespace />
+    <Description>TinyAbp FreeRedis 缓存模块，集成 FreeRedis 作为分布式缓存提供程序</Description>
+    <PackageTags>tinyabp;caching;freeredis;redis</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FreeRedis" />

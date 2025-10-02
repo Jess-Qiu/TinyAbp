@@ -8,9 +8,17 @@ using Volo.Abp.Modularity;
 
 namespace TinyAbp.Framework.Caching.FreeRedis;
 
+/// <summary>
+/// TinyAbp Framework FreeRedis 缓存模块
+/// 集成 FreeRedis 作为分布式缓存提供程序
+/// </summary>
 [DependsOn(typeof(AbpCachingModule))]
 public class TinyAbpFrameworkCachingFreeRedisModule : AbpModule
 {
+    /// <summary>
+    /// 配置服务 - 注册FreeRedis缓存相关服务
+    /// </summary>
+    /// <param name="context">服务配置上下文</param>
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
