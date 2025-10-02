@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TinyAbp.AspNetCore.Mvc.Conventions;
 using Volo.Abp.AspNetCore.Mvc;
@@ -19,9 +19,8 @@ public class TinyAbpFrameworkAspNetCoreModule : AbpModule
 {
     /// <summary>
     /// 配置服务 - 注册应用程序依赖项
-    /// 替换默认的ASP.NET Core MVC组件为TinyAbp自定义实现
     /// </summary>
-    /// <param name="context">服务配置上下文</param>
+    /// <param name="context"></param>
     /// <returns></returns>
     public override async Task ConfigureServicesAsync(ServiceConfigurationContext context)
     {

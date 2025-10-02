@@ -86,4 +86,10 @@ public class TestService : ApplicationService, ITestService
 
         return $"已设置 {key} 缓存: {await _cache.GetAsync(key)}";
     }
+
+    /// <summary>
+    /// 测试分布式锁
+    /// </summary>
+    /// <returns></returns>
+    public async Task PostCheckDistributedLock() { }
 }
