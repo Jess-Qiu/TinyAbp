@@ -1,8 +1,11 @@
+using Medallion.Threading;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Caching;
+using Volo.Abp.DistributedLocking;
 
 namespace Services.Test;
 
@@ -13,14 +16,16 @@ namespace Services.Test;
 public class TestService : ApplicationService, ITestService
 {
     private readonly IDistributedCache<string> _cache;
+    private readonly IAbpDistributedLock _distributedLock;
 
     /// <summary>
     /// 构造函数
     /// </summary>
     /// <param name="cache">分布式缓存</param>
-    public TestService(IDistributedCache<string> cache)
+    public TestService(IDistributedCache<string> cache, IAbpDistributedLock distributedLock)
     {
         _cache = cache;
+        _distributedLock = distributedLock;
     }
 
     /// <summary>
@@ -83,6 +88,7 @@ public class TestService : ApplicationService, ITestService
     public async Task<string> PostCacheItemAsync(string key, string value)
     {
         await _cache.SetAsync(key, value);
+        await _cache.SetAsync("product_count", "100");
 
         return $"已设置 {key} 缓存: {await _cache.GetAsync(key)}";
     }
@@ -91,5 +97,30 @@ public class TestService : ApplicationService, ITestService
     /// 测试分布式锁
     /// </summary>
     /// <returns></returns>
-    public async Task PostCheckDistributedLock() { }
+    public async Task PostCheckDistributedLock()
+    {
+        var key = "product_count";
+        await using var handle = await _distributedLock.TryAcquireAsync("tinyAbp_");
+        if (handle != null)
+        {
+            var count = int.Parse(await _cache.GetAsync(key) ?? "0");
+            if (count > 0)
+            {
+                count--;
+
+                await _cache.SetAsync(key, count.ToString());
+                Logger.LogWarning(
+                    $"获取到锁（{Thread.CurrentThread}）:并对商品数量进行扣减，还剩余数量为({count})"
+                );
+            }
+            else
+            {
+                Logger.LogError("商品数量库存不足" + Thread.CurrentThread.ManagedThreadId);
+            }
+        }
+        else
+        {
+            Logger.LogError("未获取到锁" + Thread.CurrentThread.ManagedThreadId);
+        }
+    }
 }

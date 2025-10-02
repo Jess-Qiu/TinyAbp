@@ -17,11 +17,7 @@ namespace TinyAbp.HttpApi.Host;
 /// <summary>
 /// Tiny Abp HttpApi Host Module - 主应用程序模块配置
 /// </summary>
-[DependsOn(
-    typeof(TinyAbpFrameworkAspNetCoreModule),
-    typeof(TinyAbpApplicationModule),
-    typeof(TinyAbpFrameworkCachingFreeRedisModule)
-)]
+[DependsOn(typeof(TinyAbpFrameworkAspNetCoreModule), typeof(TinyAbpApplicationModule))]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
     /// <summary>

@@ -5,10 +5,13 @@
     <PackageTags>tinyabp;ddd;application</PackageTags>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="DistributedLock.Redis" />
     <PackageReference Include="Volo.Abp.Ddd.Application" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" />
     <PackageReference Include="Volo.Abp.FluentValidation" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TinyAbp.Framework.Caching.FreeRedis\TinyAbp.Framework.Caching.FreeRedis.csproj" />
     <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />
     <ProjectReference Include="..\TinyAbp.Framework.Ddd.Application.Contracts\TinyAbp.Framework.Ddd.Application.Contracts.csproj" />
   </ItemGroup>
