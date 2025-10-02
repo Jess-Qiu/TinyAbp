@@ -37,12 +37,16 @@ public class TinyAbpFrameworkDddApplicationModule : AbpModule
     private void ConfigureDistributedLocking(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
+        var redisConfiguration = configuration["Redis:Configuration"];
 
-        context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+        if (!redisConfiguration.IsNullOrWhiteSpace())
         {
-            var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+            {
+                var connection = ConnectionMultiplexer.Connect(redisConfiguration);
 
-            return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
-        });
+                return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
+            });
+        }
     }
 }

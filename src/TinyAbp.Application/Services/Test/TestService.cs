@@ -22,6 +22,7 @@ public class TestService : ApplicationService, ITestService
     /// 构造函数
     /// </summary>
     /// <param name="cache">分布式缓存</param>
+    /// <param name="distributedLock">分布式锁</param>
     public TestService(IDistributedCache<string> cache, IAbpDistributedLock distributedLock)
     {
         _cache = cache;
