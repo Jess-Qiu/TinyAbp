@@ -10,11 +10,7 @@ using Volo.Abp.Modularity;
 /// <summary>
 /// Tiny Abp Framework AspNetCore Module - 集成ASP.NET Core相关功能
 /// </summary>
-[DependsOn(
-    typeof(AbpAutofacModule),
-    typeof(AbpAspNetCoreMvcModule),
-    typeof(AbpAspNetCoreSerilogModule)
-)]
+[DependsOn(typeof(AbpAspNetCoreMvcModule), typeof(AbpAspNetCoreSerilogModule))]
 public class TinyAbpFrameworkAspNetCoreModule : AbpModule
 {
     /// <summary>

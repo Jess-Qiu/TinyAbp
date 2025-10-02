@@ -8,7 +8,10 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc.Json;
 using Volo.Abp.Auditing;
+using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
+using Volo.Abp.DistributedLocking;
+using Volo.Abp.FluentValidation;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
@@ -17,7 +20,16 @@ namespace TinyAbp.HttpApi.Host;
 /// <summary>
 /// Tiny Abp HttpApi Host Module - 主应用程序模块配置
 /// </summary>
-[DependsOn(typeof(TinyAbpFrameworkAspNetCoreModule), typeof(TinyAbpApplicationModule))]
+[DependsOn(
+    // Tiny Abp Module
+    typeof(TinyAbpFrameworkAspNetCoreModule),
+    typeof(TinyAbpApplicationModule),
+    typeof(TinyAbpFrameworkCachingFreeRedisModule),
+    // Abp Module
+    typeof(AbpAutofacModule),
+    typeof(AbpFluentValidationModule),
+    typeof(AbpDistributedLockingModule)
+)]
 public class TinyAbpHttpApiHostModule : AbpModule
 {
     /// <summary>
