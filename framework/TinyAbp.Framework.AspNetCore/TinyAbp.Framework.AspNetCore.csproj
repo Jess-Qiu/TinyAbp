@@ -5,6 +5,8 @@
     <PackageTags>tinyabp;aspnetcore;framework</PackageTags>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" />
     <PackageReference Include="Volo.Abp.AspNetCore" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" />

@@ -1,3 +1,4 @@
+using TinyAbp.Application.Contracts;
 using TinyAbp.Framework.Mapster;
 using Volo.Abp.Modularity;
 
@@ -7,7 +8,11 @@ namespace TinyAbp.Application;
 /// TinyAbp应用程序模块
 /// 应用程序层的主要模块配置
 /// </summary>
-[DependsOn(typeof(TinyAbpFrameworkDddApplicationModule), typeof(TinyAbpFrameworkMapsterModule))]
+[DependsOn(
+    typeof(TinyAbpFrameworkDddApplicationModule),
+    typeof(TinyAbpApplicationContractsModule),
+    typeof(TinyAbpFrameworkMapsterModule)
+)]
 public class TinyAbpApplicationModule : AbpModule
 {
     /// <summary>

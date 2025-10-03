@@ -7,12 +7,15 @@
   <ItemGroup></ItemGroup>
   <ItemGroup>
     <PackageVersion Include="DistributedLock.Redis" Version="1.1.0" />
+    <PackageVersion Include="FluentValidation" Version="12.0.0" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageVersion Include="FreeRedis" Version="1.5.0" />
     <PackageVersion Include="FreeRedis.DistributedCache" Version="1.5.0" />
     <PackageVersion Include="Mapster" Version="7.4.0" />
     <PackageVersion Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="9.0.9" />
     <PackageVersion Include="Scalar.AspNetCore" Version="2.8.7" />
     <PackageVersion Include="Scalar.AspNetCore.Swashbuckle" Version="2.8.7" />
+    <PackageVersion Include="Serilog" Version="4.2.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageVersion Include="Serilog.Formatting.Compact" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
@@ -27,8 +30,9 @@
     <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.DistributedLocking" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.DistributedLocking.Abstractions" Version="$(AbpVersion)" />
-    <PackageVersion Include="Volo.Abp.FluentValidation" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.FluentValidation" Version="9.3.5" />
     <PackageVersion Include="Volo.Abp.ObjectMapping" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Validation" Version="9.3.5" />
   </ItemGroup>
 </Project>

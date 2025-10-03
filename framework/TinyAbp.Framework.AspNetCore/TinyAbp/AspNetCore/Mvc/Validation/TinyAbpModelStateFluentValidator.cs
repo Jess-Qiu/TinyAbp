@@ -1,0 +1,59 @@
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Validation;
+using Volo.Abp.DependencyInjection;
+
+namespace TinyAbp.AspNetCore.Mvc.Validation;
+
+public class TinyAbpModelStateFluentValidator : ITransientDependency
+{
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IModelStateValidator _modelStateValidator;
+
+    public TinyAbpModelStateFluentValidator(
+        IServiceProvider serviceProvider,
+        IModelStateValidator modelStateValidator
+    )
+    {
+        _serviceProvider = serviceProvider;
+        _modelStateValidator = modelStateValidator;
+    }
+
+    public async Task ValidateAsync(ActionExecutingContext context)
+    {
+        // 获取所有 action 参数
+        var parameters = context.ActionArguments.Values.ToList();
+
+        foreach (var parameter in parameters)
+        {
+            if (parameter == null)
+                continue;
+
+            // 获取该参数类型对应的验证器
+            var validatorType = typeof(IValidator<>).MakeGenericType(parameter.GetType());
+            var validator = _serviceProvider.GetService(validatorType) as IValidator;
+
+            if (validator != null)
+            {
+                // 执行验证
+                var validationResult = await validator.ValidateAsync(
+                    new ValidationContext<object>(parameter)
+                );
+
+                // 如果验证失败，设置模型状态错误
+                if (!validationResult.IsValid)
+                {
+                    foreach (var error in validationResult.Errors)
+                    {
+                        context.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                    }
+
+                    _modelStateValidator.Validate(context.ModelState);
+                    return;
+                }
+            }
+        }
+    }
+}

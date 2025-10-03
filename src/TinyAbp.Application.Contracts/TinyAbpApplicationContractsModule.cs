@@ -1,4 +1,5 @@
 using Volo.Abp.Modularity;
+using Volo.Abp.Validation;
 
 namespace TinyAbp.Application.Contracts;
 

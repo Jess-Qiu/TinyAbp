@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ExceptionHandling;
+﻿using System.Reflection;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using TinyAbp.Application;
+using TinyAbp.AspNetCore.Mvc.ExceptionHandling;
+using TinyAbp.AspNetCore.Mvc.Validation;
 using TinyAbp.Framework.Caching.FreeRedis;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc.Json;
+using Volo.Abp.AspNetCore.Mvc.Validation;
 using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
 using Volo.Abp.DistributedLocking;
-using Volo.Abp.FluentValidation;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
@@ -27,7 +30,6 @@ namespace TinyAbp.HttpApi.Host;
     typeof(TinyAbpFrameworkCachingFreeRedisModule),
     // Abp Module
     typeof(AbpAutofacModule),
-    typeof(AbpFluentValidationModule),
     typeof(AbpDistributedLockingModule)
 )]
 public class TinyAbpHttpApiHostModule : AbpModule
@@ -83,6 +85,9 @@ public class TinyAbpHttpApiHostModule : AbpModule
 
         // 配置 Cache
         ConfigureCache(context);
+
+        // 配置 Fluent Validator
+        ConfigureFluentValidator(context);
 
         await base.ConfigureServicesAsync(context);
     }
@@ -167,13 +172,21 @@ public class TinyAbpHttpApiHostModule : AbpModule
     private void ConfigureMvcFilter(ServiceConfigurationContext context)
     {
         context.Services.AddTransient<TinyAbpExceptionFilter>();
+        context.Services.AddTransient<TinyAbpValidationActionFilter>();
 
-        context.Services.AddMvc(options =>
+        Configure<MvcOptions>(options =>
         {
+            // 添加异常过滤器
             options.Filters.RemoveAll(x =>
                 (x as ServiceFilterAttribute)?.ServiceType == typeof(AbpExceptionFilter)
             );
             options.Filters.AddService<TinyAbpExceptionFilter>();
+
+            // 添加验证过滤器
+            options.Filters.RemoveAll(x =>
+                (x as ServiceFilterAttribute)?.ServiceType == typeof(AbpValidationActionFilter)
+            );
+            options.Filters.AddService<TinyAbpValidationActionFilter>();
         });
     }
 
@@ -187,6 +200,16 @@ public class TinyAbpHttpApiHostModule : AbpModule
         {
             options.KeyPrefix = "TinyAbp_";
         });
+    }
+
+    /// <summary>
+    /// 配置 FluentValidator
+    /// </summary>
+    /// <param name="context"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    private void ConfigureFluentValidator(ServiceConfigurationContext context)
+    {
+        context.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
     /// <summary>

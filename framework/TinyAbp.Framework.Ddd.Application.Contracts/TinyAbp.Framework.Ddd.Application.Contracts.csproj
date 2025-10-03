@@ -6,6 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TinyAbp.Framework.Core\TinyAbp.Framework.Core.csproj" />

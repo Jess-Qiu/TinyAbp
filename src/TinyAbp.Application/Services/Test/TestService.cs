@@ -1,11 +1,12 @@
+using System.Threading.Tasks;
 using Medallion.Threading;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Caching;
 using Volo.Abp.DistributedLocking;
+using Volo.Abp.Validation;
 
 namespace Services.Test;
 
@@ -16,17 +17,23 @@ namespace Services.Test;
 public class TestService : ApplicationService, ITestService
 {
     private readonly IDistributedCache<string> _cache;
-    private readonly IAbpDistributedLock _distributedLock;
+    private readonly IDistributedLockProvider _distributedLock;
+    private readonly IObjectValidator _objectValidator;
 
     /// <summary>
     /// 构造函数
     /// </summary>
     /// <param name="cache">分布式缓存</param>
     /// <param name="distributedLock">分布式锁</param>
-    public TestService(IDistributedCache<string> cache, IAbpDistributedLock distributedLock)
+    public TestService(
+        IDistributedCache<string> cache,
+        IDistributedLockProvider distributedLock,
+        IObjectValidator objectValidator
+    )
     {
         _cache = cache;
         _distributedLock = distributedLock;
+        _objectValidator = objectValidator;
     }
 
     /// <summary>
@@ -81,6 +88,17 @@ public class TestService : ApplicationService, ITestService
     }
 
     /// <summary>
+    /// 测试 Fluent Validator
+    /// </summary>
+    /// <returns></returns>
+    public async Task<ObjectResult> PostValidator(TestInput input)
+    {
+        var output = ObjectMapper.Map<TestInput, TestOutput>(input);
+
+        return new ObjectResult(output);
+    }
+
+    /// <summary>
     /// 设置缓存项
     /// </summary>
     /// <param name="key">缓存键</param>
@@ -101,7 +119,7 @@ public class TestService : ApplicationService, ITestService
     public async Task PostCheckDistributedLock()
     {
         var key = "product_count";
-        await using var handle = await _distributedLock.TryAcquireAsync("tinyAbp_");
+        await using var handle = await _distributedLock.TryAcquireLockAsync("tinyAbp_");
         if (handle != null)
         {
             var count = int.Parse(await _cache.GetAsync(key) ?? "0");

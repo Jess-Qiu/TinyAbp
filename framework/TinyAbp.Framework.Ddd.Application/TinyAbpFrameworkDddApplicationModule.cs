@@ -1,12 +1,8 @@
-using FreeRedis;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using TinyAbp.Framework.Caching.FreeRedis;
 using Volo.Abp.Application;
-using Volo.Abp.DistributedLocking;
-using Volo.Abp.FluentValidation;
 using Volo.Abp.Modularity;
 
 /// <summary>
