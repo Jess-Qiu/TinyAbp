@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Http;
 
-namespace Microsoft.AspNetCore.Mvc.ExceptionHandling;
+namespace TinyAbp.AspNetCore.Mvc.ExceptionHandling;
 
 /// <summary>
 /// TinyAbp异常过滤器
