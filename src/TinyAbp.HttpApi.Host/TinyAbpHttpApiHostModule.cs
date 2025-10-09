@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+using System.Reflection;
 using FluentValidation;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Hybrid;
 using StackExchange.Redis;
 using TinyAbp.Application;
 using TinyAbp.AspNetCore.Mvc.ExceptionHandling;
@@ -17,6 +18,7 @@ using Volo.Abp.AspNetCore.Mvc.Validation;
 using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
+using Volo.Abp.Caching.Hybrid;
 using Volo.Abp.DistributedLocking;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
@@ -24,7 +26,8 @@ using Volo.Abp.Modularity;
 namespace TinyAbp.HttpApi.Host;
 
 /// <summary>
-/// Tiny Abp HttpApi Host Module - 主应用程序模块配置
+/// TinyAbp HttpApi Host 模块
+/// 主应用程序模块配置，负责HTTP API主机的所有服务配置
 /// </summary>
 [DependsOn(
     // Tiny Abp Module
@@ -41,7 +44,7 @@ public class TinyAbpHttpApiHostModule : AbpModule
     /// 预配置服务 - 在ConfigureServices之前执行
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    /// <returns></returns>
+    /// <returns>异步任务</returns>
     public override async Task PreConfigureServicesAsync(ServiceConfigurationContext context)
     {
         // 预配置阶段：在主要服务配置之前执行
@@ -62,10 +65,10 @@ public class TinyAbpHttpApiHostModule : AbpModule
     }
 
     /// <summary>
-    /// 配置服务 - 注册应用程序依赖项
+    /// 配置服务 - 注册HTTP API主机相关服务
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    /// <returns></returns>
+    /// <returns>异步任务</returns>
     public override async Task ConfigureServicesAsync(ServiceConfigurationContext context)
     {
         // 配置Swagger API文档
@@ -202,6 +205,14 @@ public class TinyAbpHttpApiHostModule : AbpModule
     /// <param name="context">服务配置上下文</param>
     private void ConfigureCache(ServiceConfigurationContext context)
     {
+        Configure<AbpHybridCacheOptions>(options =>
+        {
+            options.GlobalHybridCacheEntryOptions = new HybridCacheEntryOptions
+            {
+                Expiration = TimeSpan.FromMinutes(20),
+                LocalCacheExpiration = TimeSpan.FromMinutes(10),
+            };
+        });
         Configure<AbpDistributedCacheOptions>(options =>
         {
             options.KeyPrefix = "TinyAbp_";

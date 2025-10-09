@@ -14,7 +14,7 @@ public class TinyAbpApplicationContractsModule : AbpModule
     /// 配置服务 - 注册应用程序契约服务
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    /// <returns></returns>
+    /// <returns>异步任务</returns>
     public override async Task ConfigureServicesAsync(ServiceConfigurationContext context)
     {
         await base.ConfigureServicesAsync(context);

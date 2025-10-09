@@ -1,11 +1,10 @@
-using System.Threading.Tasks;
 using Medallion.Threading;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Services.Test.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Caching;
-using Volo.Abp.DistributedLocking;
+using Volo.Abp.Caching.Hybrid;
 using Volo.Abp.Validation;
 
 namespace Services.Test;
@@ -16,7 +15,8 @@ namespace Services.Test;
 /// </summary>
 public class TestService : ApplicationService, ITestService
 {
-    private readonly IDistributedCache<string> _cache;
+    private readonly IDistributedCache<TestInput> _cache;
+    private readonly IHybridCache<TestInput> _hybridCache;
     private readonly IDistributedLockProvider _distributedLock;
     private readonly IObjectValidator _objectValidator;
 
@@ -26,13 +26,16 @@ public class TestService : ApplicationService, ITestService
     /// <param name="cache">分布式缓存</param>
     /// <param name="distributedLock">分布式锁</param>
     /// <param name="objectValidator">对象验证器</param>
+    /// <param name="hybridCache">多级缓存</param>
     public TestService(
-        IDistributedCache<string> cache,
+        IDistributedCache<TestInput> cache,
         IDistributedLockProvider distributedLock,
-        IObjectValidator objectValidator
+        IObjectValidator objectValidator,
+        IHybridCache<TestInput> hybridCache
     )
     {
         _cache = cache;
+        _hybridCache = hybridCache;
         _distributedLock = distributedLock;
         _objectValidator = objectValidator;
     }
@@ -107,10 +110,30 @@ public class TestService : ApplicationService, ITestService
     /// <returns>设置结果</returns>
     public async Task<string> PostCacheItemAsync(string key, string value)
     {
-        await _cache.SetAsync(key, value);
-        await _cache.SetAsync("product_count", "100");
+        //await _cache.SetAsync(key, new TestInput { Name = key, Name1 = value });
+        var val = await _cache.GetAsync(key);
+        return $"已设置 {key} 缓存: {val}";
+    }
 
-        return $"已设置 {key} 缓存: {await _cache.GetAsync(key)}";
+    /// <summary>
+    /// 设置多级缓存项
+    /// </summary>
+    /// <param name="key">缓存键</param>
+    /// <param name="value">缓存值</param>
+    /// <returns>设置结果</returns>
+    public async Task<JsonResult> PostHybridCacheItemAsync()
+    {
+        var test = new TestInput { Name = "ceshi", Name1 = "ceshi1111" };
+
+        var cacheValue = await _hybridCache.GetOrCreateAsync("ceshi", async () => test);
+
+        test.Name = "ceshi222";
+
+        await _hybridCache.SetAsync("ceshi", test);
+
+        cacheValue = await _hybridCache.GetOrCreateAsync("ceshi", async () => new TestInput { });
+
+        return new JsonResult(cacheValue);
     }
 
     /// <summary>
@@ -123,24 +146,24 @@ public class TestService : ApplicationService, ITestService
         await using var handle = await _distributedLock.TryAcquireLockAsync("tinyAbp_");
         if (handle != null)
         {
-            var count = int.Parse(await _cache.GetAsync(key) ?? "0");
-            if (count > 0)
-            {
-                count--;
+            //    var count = int.Parse(await _cache.GetAsync(key) ?? "0");
+            //    if (count > 0)
+            //    {
+            //        count--;
 
-                await _cache.SetAsync(key, count.ToString());
-                Logger.LogWarning(
-                    $"获取到锁（{Thread.CurrentThread}）:并对商品数量进行扣减，还剩余数量为({count})"
-                );
-            }
-            else
-            {
-                Logger.LogError("商品数量库存不足" + Thread.CurrentThread.ManagedThreadId);
-            }
-        }
-        else
-        {
-            Logger.LogError("未获取到锁" + Thread.CurrentThread.ManagedThreadId);
+            //        await _cache.SetAsync(key, count.ToString());
+            //        Logger.LogWarning(
+            //            $"获取到锁（{Thread.CurrentThread}）:并对商品数量进行扣减，还剩余数量为({count})"
+            //        );
+            //    }
+            //    else
+            //    {
+            //        Logger.LogError("商品数量库存不足" + Thread.CurrentThread.ManagedThreadId);
+            //    }
+            //}
+            //else
+            //{
+            //    Logger.LogError("未获取到锁" + Thread.CurrentThread.ManagedThreadId);
         }
     }
 }
