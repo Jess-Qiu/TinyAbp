@@ -25,6 +25,7 @@ public class TestService : ApplicationService, ITestService
     /// </summary>
     /// <param name="cache">分布式缓存</param>
     /// <param name="distributedLock">分布式锁</param>
+    /// <param name="objectValidator">对象验证器</param>
     public TestService(
         IDistributedCache<string> cache,
         IDistributedLockProvider distributedLock,
