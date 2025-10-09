@@ -6,8 +6,8 @@ namespace TinyAbp.Domain.Shared;
 /// TinyAbp域共享模块
 /// 提供领域层的共享常量、枚举和基础类型定义
 /// </summary>
-public class TinyAbpDomainSharedModule : AbpModule 
-{ 
+public class TinyAbpDomainSharedModule : AbpModule
+{
     /// <summary>
     /// 配置服务 - 注册域共享服务
     /// </summary>

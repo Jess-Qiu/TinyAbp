@@ -6,8 +6,8 @@ namespace TinyAbp.Domain;
 /// TinyAbp域模块
 /// 负责领域层核心业务逻辑的配置和管理
 /// </summary>
-public class TinyAbpDomainModule : AbpModule 
-{ 
+public class TinyAbpDomainModule : AbpModule
+{
     /// <summary>
     /// 配置服务 - 注册领域层依赖项
     /// </summary>
