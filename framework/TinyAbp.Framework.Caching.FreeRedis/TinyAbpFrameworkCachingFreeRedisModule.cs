@@ -1,4 +1,4 @@
-﻿using FreeRedis;
+using FreeRedis;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -19,7 +19,8 @@ public class TinyAbpFrameworkCachingFreeRedisModule : AbpModule
     /// 配置服务 - 注册FreeRedis缓存相关服务
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    public override void ConfigureServices(ServiceConfigurationContext context)
+    /// <returns>异步任务</returns>
+    public override async Task ConfigureServicesAsync(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
 
@@ -38,7 +39,9 @@ public class TinyAbpFrameworkCachingFreeRedisModule : AbpModule
                     )
                 );
             }
-            ;
         }
+        ;
+
+        await base.ConfigureServicesAsync(context);
     }
 }

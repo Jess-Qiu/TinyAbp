@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using Volo.Abp.AspNetCore.Filters;
@@ -10,8 +10,18 @@ using Volo.Abp.Validation;
 
 namespace TinyAbp.AspNetCore.Mvc.Validation;
 
+/// <summary>
+/// TinyAbp验证操作过滤器
+/// 在控制器操作执行前进行模型验证
+/// </summary>
 public class TinyAbpValidationActionFilter : IAsyncActionFilter, IAbpFilter, ITransientDependency
 {
+    /// <summary>
+    /// 异步操作执行方法
+    /// </summary>
+    /// <param name="context">操作执行上下文</param>
+    /// <param name="next">操作执行委托</param>
+    /// <returns>异步任务</returns>
     public async Task OnActionExecutionAsync(
         ActionExecutingContext context,
         ActionExecutionDelegate next

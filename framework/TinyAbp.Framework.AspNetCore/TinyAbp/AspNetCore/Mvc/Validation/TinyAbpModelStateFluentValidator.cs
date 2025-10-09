@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Volo.Abp.AspNetCore.Mvc;
@@ -7,11 +7,20 @@ using Volo.Abp.DependencyInjection;
 
 namespace TinyAbp.AspNetCore.Mvc.Validation;
 
+/// <summary>
+/// TinyAbp模型状态Fluent验证器
+/// 使用FluentValidation对模型状态进行验证
+/// </summary>
 public class TinyAbpModelStateFluentValidator : ITransientDependency
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly IModelStateValidator _modelStateValidator;
 
+    /// <summary>
+    /// 构造函数 - 注入依赖服务
+    /// </summary>
+    /// <param name="serviceProvider">服务提供程序</param>
+    /// <param name="modelStateValidator">模型状态验证器</param>
     public TinyAbpModelStateFluentValidator(
         IServiceProvider serviceProvider,
         IModelStateValidator modelStateValidator
@@ -21,6 +30,11 @@ public class TinyAbpModelStateFluentValidator : ITransientDependency
         _modelStateValidator = modelStateValidator;
     }
 
+    /// <summary>
+    /// 异步验证模型状态
+    /// </summary>
+    /// <param name="context">操作执行上下文</param>
+    /// <returns>异步任务</returns>
     public async Task ValidateAsync(ActionExecutingContext context)
     {
         // 获取所有 action 参数

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +18,7 @@ public class TinyAbpFrameworkMapsterModule : AbpModule
     /// 配置服务 - 注册 Mapster 相关服务
     /// </summary>
     /// <param name="context">服务配置上下文</param>
-    /// <returns></returns>
+    /// <returns>异步任务</returns>
     public override async Task ConfigureServicesAsync(ServiceConfigurationContext context)
     {
         // 扫描当前程序集，注册 Mapster 配置
