@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 using FluentValidation;
+using Medallion.Threading;
+using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 using TinyAbp.Application;
 using TinyAbp.AspNetCore.Mvc.ExceptionHandling;
 using TinyAbp.AspNetCore.Mvc.Validation;
@@ -85,6 +88,9 @@ public class TinyAbpHttpApiHostModule : AbpModule
 
         // 配置 Cache
         ConfigureCache(context);
+
+        // 配置分布式锁
+        ConfigureDistributedLocking(context);
 
         // 配置 Fluent Validator
         ConfigureFluentValidator(context);
@@ -200,6 +206,29 @@ public class TinyAbpHttpApiHostModule : AbpModule
         {
             options.KeyPrefix = "TinyAbp_";
         });
+    }
+
+    /// <summary>
+    /// 配置分布式锁
+    /// </summary>
+    /// <param name="context">服务配置上下文</param>
+    private void ConfigureDistributedLocking(ServiceConfigurationContext context)
+    {
+        var configuration = context.Services.GetConfiguration();
+        var redisConfiguration = configuration["Redis:Configuration"];
+        var redisEnabled = configuration["Redis:IsEnabled"];
+        if (string.IsNullOrEmpty(redisEnabled) || bool.Parse(redisEnabled))
+        {
+            if (!redisConfiguration.IsNullOrWhiteSpace())
+            {
+                context.Services.AddSingleton<IDistributedLockProvider>(sp =>
+                {
+                    var connection = ConnectionMultiplexer.Connect(redisConfiguration);
+
+                    return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
+                });
+            }
+        }
     }
 
     /// <summary>

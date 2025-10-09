@@ -14,7 +14,6 @@
 - [x] Exception 异常处理
 - [x] Json 序列化
 - [x] Mapster 对象映射
-- [x] FluentValidator 参数校验
 
 ## 📋 完整开发事项清单
 
@@ -45,16 +44,16 @@
 
 ### 🛠️ 企业级功能
 
-- [ ] **FluentValidation 参数校验**
-  - [ ] 添加 FluentValidation 包
-  - [ ] 创建验证器基类
-  - [ ] 实现 DTO 验证器
-  - [ ] 配置自动验证
-  - [ ] 自定义验证规则
+- [x] **FluentValidation 参数校验**
+  - [x] 添加 FluentValidation 包
+  - [x] 创建验证器基类
+  - [x] 实现 DTO 验证器
+  - [x] 配置自动验证
+  - [x] 自定义验证规则
 
-- [ ] **缓存系统**
-  - [ ] 集成内存缓存
-  - [ ] 添加 Redis 缓存支持
+- [x] **缓存系统**
+  - [x] 集成内存缓存
+  - [x] 添加 Redis 缓存支持
   - [ ] 创建缓存服务接口
   - [ ] 实现缓存装饰器
 
