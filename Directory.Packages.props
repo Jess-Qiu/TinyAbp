@@ -4,7 +4,8 @@
     <!-- 启用集中式包管理 - 参见 https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="DistributedLock.Redis" Version="1.1.0" />
     <PackageVersion Include="FluentValidation" Version="12.0.0" />
@@ -28,6 +29,8 @@
     <PackageVersion Include="Volo.Abp.Core" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpVersion)" />
+    <PackageVersion Include="Volo.Abp.Ddd.Domain" Version="9.3.5" />
+    <PackageVersion Include="Volo.Abp.Ddd.Domain.Shared" Version="9.3.5" />
     <PackageVersion Include="Volo.Abp.DistributedLocking" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.DistributedLocking.Abstractions" Version="$(AbpVersion)" />
     <PackageVersion Include="Volo.Abp.FluentValidation" Version="9.3.5" />

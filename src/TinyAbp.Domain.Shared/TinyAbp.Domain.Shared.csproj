@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+    <Description>TinyAbp 域共享模块，提供领域层的共享常量、枚举和基础类型</Description>
+    <PackageTags>tinyabp;domain;shared</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain.Shared" />
+  </ItemGroup>
+</Project>

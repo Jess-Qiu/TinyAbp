@@ -6,5 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Ddd.Application.Contracts\TinyAbp.Framework.Ddd.Application.Contracts.csproj" />
+    <ProjectReference Include="..\TinyAbp.Domain.Shared\TinyAbp.Domain.Shared.csproj" />
   </ItemGroup>
 </Project>

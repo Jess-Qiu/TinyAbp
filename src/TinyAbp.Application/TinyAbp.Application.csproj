@@ -8,5 +8,6 @@
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Ddd.Application\TinyAbp.Framework.Ddd.Application.csproj" />
     <ProjectReference Include="..\..\framework\TinyAbp.Framework.Mapster\TinyAbp.Framework.Mapster.csproj" />
     <ProjectReference Include="..\TinyAbp.Application.Contracts\TinyAbp.Application.Contracts.csproj" />
+    <ProjectReference Include="..\TinyAbp.Domain\TinyAbp.Domain.csproj" />
   </ItemGroup>
 </Project>

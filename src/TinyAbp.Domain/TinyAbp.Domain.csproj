@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace />
+    <Description>TinyAbp 域模块，包含核心业务逻辑、实体定义和领域服务</Description>
+    <PackageTags>tinyabp;domain;ddd</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TinyAbp.Domain.Shared\TinyAbp.Domain.Shared.csproj" />
+  </ItemGroup>
+</Project>
